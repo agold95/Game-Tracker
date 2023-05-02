@@ -1,0 +1,71 @@
+{% extends "capstone/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<br>
+<br>
+<div class="d-flex justify-content-center jumbotron pt-4">
+    <h3 class="text-wrap text-center" style="width: 54rem;">Game Tracker lets you keep tabs on the games you want to play, the games you are currently playing, and the games you've played.</h3>
+</div>
+<br>
+<hr>
+<br>
+<br>
+
+<div class="row">
+    <div class="col px-5">
+        <div>
+            <div>
+                <h4>Start by browsing the Games List and click on a game you want to play.</h4>
+            </div>
+            <br>
+            <div class="text-center">
+                <a href="{% url 'games_list' %}" class="btn btn-primary btn-lg">Browse Games</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col px-5 rounded" style="background-color:#e0e0e052">
+        <div>
+            <br>
+            <div>
+                <h4>Check out some of the info about the game, and when you're ready add it to your own personal playlist.</h4>
+            </div>
+            <br>
+            <br>
+            <div>
+                <h4>If instead you'd like to jump right in and start playing right away, click "Start Playing" and your game will be added to your playing-list.</h4>
+            </div>
+            <br>
+            <br>
+            <div>
+                <h4>Once you've completed the game, click "Finish Playing" to add your game to your list of games you've finished!</h4>
+            </div>
+            <br>
+            <br>
+            <div class="text-center">
+                <h4>View your profile here!</h4>
+                <br>
+                <div class="text-center">
+                    <a href="{% url 'profile' %}" class="btn btn-warning btn-lg">Profile</a>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div class="col px-5">
+        <div>
+            <div>
+                <h4>If you can't find the game you're looking for, add one to our ever-growing database!</h4>
+            </div>
+            <br>
+            <div class="text-center">
+                <a href="{% url 'add_game' %}" class="btn btn-success btn-lg">Add a Game</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

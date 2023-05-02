@@ -1,0 +1,48 @@
+{% extends "capstone/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<br>
+<h1 class="ps-3">Add a Game</h1>
+<br>
+
+<div>
+    <form action="{% url 'add_game' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group w-25 ps-3">
+            <input class="form-control" style="background-color:#e6e6e6" type="text" name="title" placeholder="Title" autofocus required>
+        </div>
+        <br>
+        <div class="form-group w-50 ps-3">
+            <textarea class="form-control" style="background-color:#e6e6e6" name="description" placeholder="Description" rows="5" ></textarea>
+        </div>
+        <br>
+        <div class="form-group w-25 ps-3">
+            <input class="form-control" style="background-color:#e6e6e6" type="text" name="genre" placeholder="Genre">
+        </div>
+        <br>
+        <div class="form-group w-25 ps-3">
+            <input class="form-control" style="background-color:#e6e6e6" type="text" name="platform" placeholder="Platform">
+        </div>
+        <br>
+        <div class="form-group w-25 ps-3">
+            <input class="form-control" style="background-color:#e6e6e6" type="text" name="developer" placeholder="Developer">
+        </div>
+        <br>
+        <div class="form-group w-25 ps-3">
+            <input class="form-control" style="background-color:#e6e6e6" type="text" name="publisher" placeholder="Publisher">
+        </div>
+        <br>
+        <div class="form-group w-50 ps-3">
+            <input class="form-control" style="background-color:#e6e6e6" name="image" placeholder="Game Box-Art URL" type="text">
+        </div>
+        <br>
+        <br>
+        <div class="form-group ps-3">
+            <input class="btn btn-success" type="submit" value="Add Game">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

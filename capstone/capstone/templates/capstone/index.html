@@ -1,0 +1,47 @@
+{% extends "capstone/layout.html" %}
+{% load static %}
+
+{% block body %}
+    
+    <div class="jumbotron text-center pt-4">
+        <h1>Welcome to</h1>
+        <h1><strong>Game Tracker</strong></h1>
+    </div>
+    <br>
+
+    <div class="text-center">
+        <img src="{% static 'capstone/images/game-controller1.png' %}" alt="game controller" class="img-responsive rounded-circle border border-5 border-danger" style="max-width: 20%; background-color: #fca118;">
+    </div>
+    <br>
+    <div class="d-flex justify-content-center">
+        <h3 class="text-wrap text-center" style="width: 54rem;">With Game Tracker, you can keep track of games you've played, games you're currently playing, and games you want to play.</h3>
+    </div>
+    <br>
+
+    <div class="text-center">
+    {% if user.is_authenticated %}
+        <div>
+            <h5>Welcome back, {{ user.username }}.</h5>
+            <br>
+        </div>
+            <div>
+                <a href="{% url 'profile' %}" class="btn btn-success btn-lg">Profile</a>
+            </div>
+    {% else %}
+        <div class="text-center">
+            <h5>Create an account or sign in to start using Game Tracker today!</h5>
+        </div>
+        <br>
+        <div>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-3">Register</a>
+            <a href="{% url 'login' %}" class="btn btn-success btn-lg ms-3">Login</a>
+        </div>
+        <br>
+        <div class="text-center">
+            <a href="{% url 'about' %}" class="btn btn-warning btn-lg">About</a>
+        </div>
+    {% endif %}
+    </div>
+    <br>
+
+{% endblock %}

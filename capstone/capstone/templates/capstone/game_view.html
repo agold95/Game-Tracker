@@ -1,0 +1,111 @@
+{% extends "capstone/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+{% block script %}
+
+    <script type="text/javascript" src="{% static 'capstone/main.js' %}"></script>
+
+{% endblock %}
+
+    <div class="alert alert-success text-center" id="edit-alert" style="display: none;">
+        <p class="m-0">Edit Saved</p>
+    </div>
+
+    <div class="row">
+        <div class="col border-end border-secondary" style="min-height: 100vh;">
+            <ul class="list-group list-group-flush ps-3">
+                <br>
+                <li class="list-group-item border-dark rounded rounded-4" style="background-color:rgb(151, 151, 151);"><h1 id="game-title-{{ game.id }}">{{ game.title }}</h1></li>
+                <br>
+
+                <li class="list-group-item border-dark rounded rounded-4" style="background-color:rgb(151, 151, 151);">
+                    <p id="game-description-{{ game.id }}">{{ game.description }}</p></li>
+                <textarea class="form-control mb-2 list-group-item text-secondary ps-3" id="edit-description-{{ game.id }}" name="edit-description" style="display: none; background-color:#e6e6e6" placeholder="Edit Description" type="text">{{ game.description }}</textarea>
+                <br>
+                <li class="list-group-item border-dark rounded rounded-4" style="background-color:rgb(151, 151, 151);">
+                    <h5 class="d-inline">Genre: </h5><p class="d-inline" id="game-genre-{{ game.id }}">{{ game.genre }}</p>
+                </li>
+                <input class="form-control mb-2 list-group-item text-secondary w-50 ps-3" id="edit-genre-{{ game.id }}" name="edit-genre" style="display: none; background-color:#e6e6e6" placeholder="Edit Genre" type="text" value="{{ game.genre }}"></input>
+                <br>
+                <li class="list-group-item border-dark rounded rounded-4" style="background-color:rgb(151, 151, 151);">
+                    <h5 class="d-inline">Platform: </h5><p class="d-inline" id="game-platform-{{ game.id }}">{{ game.platform }}</p>
+                </li>
+                <input class="form-control mb-2 list-group-item text-secondary w-50 ps-3" id="edit-platform-{{ game.id }}" name="edit-platform" style="display: none; background-color:#e6e6e6" placeholder="Edit Platform" type="text" value="{{ game.platform }}"></input>
+                <br>
+                <li class="list-group-item border-dark rounded rounded-4" style="background-color:rgb(151, 151, 151);">
+                    <h5 class="d-inline">Developer: </h5><p class="d-inline" id="game-developer-{{ game.id }}">{{ game.developer }}</p>
+                </li>
+                <input class="form-control mb-2 list-group-item text-secondary w-50 ps-3" id="edit-developer-{{ game.id }}" name="edit-developer" style="display: none; background-color:#e6e6e6" placeholder="Edit Developer" type="text" value="{{ game.developer }}"></input>
+                <br>
+                <li class="list-group-item border-dark rounded rounded-4" style="background-color:rgb(151, 151, 151);">
+                    <h5 class="d-inline">Publisher: </h5><p class="d-inline" id="game-publisher-{{ game.id }}">{{ game.publisher }}</p>
+                </li>
+                <input class="form-control mb-2 list-group-item text-secondary w-50 ps-3" id="edit-publisher-{{ game.id }}" name="edit-publisher" style="display: none; background-color:#e6e6e6" placeholder="Edit Publisher" type="text" value="{{ game.publisher }}"></input>
+                <br>
+                <li class="list-group-item border-dark rounded rounded-4" style="background-color:rgb(151, 151, 151);">
+                    <small><p class="d-inline">Added by: </p><p class="d-inline" id="added-by">{{ game.added_by }}</p></small>
+                </li>
+                <br>
+                <br>
+                <input class="form-control mb-2 list-group-item text-secondary w-50 ps-3" id="edit-image-{{ game.id }}" name="edit-image" style="display: none; background-color:#e6e6e6" placeholder="Game Image URL"  type="text" value="{{ game.image }}"></input>
+            </ul>
+
+            <div class="text-center">
+                <div class="btn-group">
+                    {% if user.is_authenticated %}
+                        <div class="px-5">
+                            {% if new_game %}
+                                <a href="{% url 'add_to_playlist' game.id %}" class="btn btn-warning btn-lg" name="remove-from-playlist">Remove from Playlist</a>
+                            {% else %}
+                                <a href="{% url 'add_to_playlist' game.id %}" class="btn btn-primary btn-lg" name="add-to-playlist">Add to Playlist</a>
+                            {% endif %}
+                        </div>
+                    
+                        {% if played_game %}
+                            <button class="btn btn-outline-success px-3 font-weight-bold" aria-disabled="true" disabled><strong>Game Completed!</strong></button>
+                        {% else %}
+                            <div class="px-5">
+                                {% if playing_game %}
+                                    <a href="{% url 'add_to_playedlist' game.id %}" class="btn btn-success btn-lg" name="add-to-playedlist">Finish Playing</a>
+                                {% else %}
+                                    <a href="{% url 'add_to_playinglist' game.id %}" class="btn btn-success btn-lg" name="add-to-playinglist">Start Playing</a>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+                <br>
+                <br>
+            <div class="text-center">
+                <div class="btn-group">
+                    {% if user.username == game.added_by %}
+                        <div class="px-3">
+                            <button id="edit" onclick="edit('{{ game.id }}')" class="btn btn-secondary btn-sm">Edit</button>
+                            <button id="edit-button-{{ game.id }}" class="btn btn-success btn-sm" style="display: none;">Save</button>
+                        </div>
+                        <div class="px-3">
+                            <form action="{% url 'delete_game' game.id %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="game_id" value="{{ game.id }}">
+                                <button type="submit" class="btn btn-danger btn-sm" id="delete-button" onclick="return delete_confirmation()">Delete Game</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="w-100"></div>
+        </div>
+        
+        <div class="col">
+            <br>
+            <div class="text-center">
+                <img src="{{ game.image }}" class="" style="height: 800px; width: 650px;">
+            </div>
+        </div>
+    </div>
+            
+{% endblock %}

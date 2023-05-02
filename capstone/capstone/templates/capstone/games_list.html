@@ -1,0 +1,63 @@
+{% extends "capstone/layout.html" %}
+{% load static %}
+
+<script src="{% static 'capstone/main.js' %}"></script>
+
+{% block body %}
+
+<br>
+<h1 class="ps-3">Games List</h1>
+<br>
+<div>
+    <div>
+        {% if empty %}
+            <h3 class="ps-3">No games yet!</h3>
+        {% else %}
+            <div class="container">
+                {% for game in page_obj %}
+                    {% if forloop.counter0|divisibleby:3 %}
+                        <div class="row text-center post">
+                    {% endif %}
+                    <div class="col">
+                        <div class="card mb-3" style="background-color:#8b8b8b">
+                            <br>
+                            <div>
+                                <img src="{{ game.image }}" class="border border-3 border-dark" style="height: 200px; width: 200px;">
+                            </div>
+                            <br>
+                            <div class="card-content">
+                                <h3 class="card-title">{{ game.title }}</h3>
+                                <span class="d-inline-block text-truncate" style="max-width: 400px;"><small class="card-text">{{ game.description }}</small></span>
+                                <br>
+                                <br>
+                                <a href="{% url 'game_view' game.title game.id %}" class="btn btn-primary">View Game</a>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 or forloop.last %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="d-flex justify-content-center">
+        {% if page_obj.has_previous %}
+        <ul class="pagination pagination-lg justify-content-center mr-2 p-3">
+            <li class="page-obj"><a class="page-link rounded border-secondary" href="?page={{ page_obj.previous_page_number }}" style="background-color:#cccbcb">&laquo; Previous</a></li>
+        </ul>
+        {% endif %}
+        
+        {% if page_obj.has_next %}
+        <ul class="pagination pagination-lg justify-content-center mr-2 p-3">
+            <li class="page-obj"><a class="page-link rounded border-secondary" href="?page={{ page_obj.next_page_number }}" style="background-color:#cccbcb">Next &raquo;</a></li>
+        </ul>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}

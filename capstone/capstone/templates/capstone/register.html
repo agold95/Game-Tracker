@@ -1,0 +1,39 @@
+{% extends "capstone/layout.html" %}
+
+{% block body %}
+    <br>
+    <h1 class="ps-3">Register</h1>
+    <br>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group form-group w-25 ps-3">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username" style="background-color:#e6e6e6">
+        </div>
+        <br>
+        <div class="form-group w-25 ps-3">
+            <input class="form-control" type="email" name="email" placeholder="Email Address" style="background-color:#e6e6e6">
+        </div>
+        <br>
+        <div class="form-group w-25 ps-3">
+            <input class="form-control" type="password" name="password" placeholder="Password" style="background-color:#e6e6e6">
+        </div>
+        <br>
+        <div class="form-group w-25 ps-3">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password" style="background-color:#e6e6e6">
+        </div>
+        <br>
+        <div class="ps-3">
+            <input class="btn btn-primary" type="submit" value="Register">
+        </div>
+        
+    </form>
+    <div class="ps-3">
+        <p>Already have an account? <a href="{% url 'login' %}">Log In here.</a></p>
+    </div>
+
+{% endblock %}
