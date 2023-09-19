@@ -6,9 +6,9 @@ Game Tracker is an app that lets users track the video games they want to play, 
 The app is useful for keeping tabs and track of all the games the user has played, and can effectively be scaled to a wider number of users. Each game created has its own unique entry into the database, and contains fields for information about the game, such as the game’s description, genre, platform, publisher, and developer, as well as any box-art released for the game. All these fields are changeable (except for the title) as long as the user who created the entry is valid.
 
 ## Screenshots
-!(Game Tracker Webpage)[https://raw.githubusercontent.com/agold95/portfolio/main/images/gametracker.png]
-!(list of games)[https://raw.githubusercontent.com/agold95/Game-Tracker/main/capstone/capstone/static/capstone/images/toads.png]
-!(single game)[https://raw.githubusercontent.com/agold95/Game-Tracker/main/capstone/capstone/static/capstone/images/toads2.png]
+![Game Tracker Webpage](https://raw.githubusercontent.com/agold95/portfolio/main/images/gametracker.png)
+![list of games](https://raw.githubusercontent.com/agold95/Game-Tracker/main/capstone/capstone/static/capstone/images/toads.png)
+![single game](https://raw.githubusercontent.com/agold95/Game-Tracker/main/capstone/capstone/static/capstone/images/toads2.png)
 
 ## How to Run
 1.	Make sure you have [Python](https://www.python.org/downloads/) installed.
